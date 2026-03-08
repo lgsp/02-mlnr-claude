@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nombres Réels — Seconde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- KaTeX : plus fiable que MathJax pour le rendu inline dans du HTML dynamique -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="page">
+<header>
+  <div class="chapter-tag">Seconde · Chapitre N · Nombres</div>
+  <h1>Manipuler les Nombres Réels</h1>
+  <p>Droite numérique, intervalles, valeur absolue, ensembles ℕ ⊂ ℤ ⊂ 𝔻 ⊂ ℚ ⊂ ℝ</p>
+</header>
+<nav>
+  <a href="#ensembles">Ensembles</a>
+  <a href="#intervalles">Intervalles</a>
+  <a href="#valabs">Valeur absolue</a>
+  <a href="#encadrement">Encadrement</a>
+  <a href="#irrationnels">Irrationnels</a>
+  <a href="#algo">Algorithme</a>
+  <a href="#qcm">QCM</a>
+  <a href="#contact">Contact</a>
+</nav>
+<main>
+
+<!-- ============================================================ 01 ENSEMBLES -->
+<section id="ensembles">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>Les ensembles de nombres</h2>
+  </div>
+
+  <div class="card">
+    <h3>Une hiérarchie d'ensembles</h3>
+    <p>Chaque ensemble est inclus dans le suivant : \(\mathbb{N} \subset \mathbb{Z} \subset \mathbb{D} \subset \mathbb{Q} \subset \mathbb{R}\)</p>
+    <div id="sets-svg-wrap" style="overflow:auto; margin: 1rem 0 0.5rem;"></div>
+    <p style="font-size:0.82rem; color:#666; margin-top:0.5rem;">Clique sur un anneau pour voir la définition de l'ensemble.</p>
+    <div id="set-info" class="result-box" style="margin-top:0.5rem; font-family:'DM Sans',sans-serif; font-size:0.88rem; min-height:2.5rem;"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>ℕ — Entiers naturels</h3>
+      <p>\(\mathbb{N} = \{0, 1, 2, 3, \ldots\}\)</p>
+      <p style="margin-top:0.5rem; font-size:0.85rem;">Les entiers positifs ou nuls. Utilisés pour compter.</p>
+    </div>
+    <div class="card">
+      <h3>ℤ — Entiers relatifs</h3>
+      <p>\(\mathbb{Z} = \{\ldots, -2, -1, 0, 1, 2, \ldots\}\)</p>
+      <p style="margin-top:0.5rem; font-size:0.85rem;">Entiers positifs, négatifs et zéro.</p>
+    </div>
+    <div class="card">
+      <h3>𝔻 — Décimaux</h3>
+      <p>\(\mathbb{D} = \left\{\dfrac{p}{10^n} \mid p \in \mathbb{Z},\, n \in \mathbb{N}\right\}\)</p>
+      <p style="margin-top:0.5rem; font-size:0.85rem;">Fractions dont le dénominateur est une puissance de 10. Ex : \(0{,}25 = \dfrac{25}{10^2}\). <strong>Tout décimal est rationnel.</strong></p>
+    </div>
+    <div class="card">
+      <h3>ℚ — Rationnels</h3>
+      <p>\(\mathbb{Q} = \left\{\dfrac{p}{q} \mid p \in \mathbb{Z},\, q \in \mathbb{Z}^*\right\}\)</p>
+      <p style="margin-top:0.5rem; font-size:0.85rem;">Quotients d'entiers. Contient les décimaux et des non-décimaux comme \(\dfrac{1}{3} = 0{,}333\ldots\)</p>
+    </div>
+  </div>
+
+  <div class="card highlight">
+    <h3 style="color:var(--gold)">ℝ — Nombres réels</h3>
+    <p>L'ensemble \(\mathbb{R}\) est représenté par la <strong>droite numérique</strong> : à chaque point de la droite graduée correspond un unique réel, et réciproquement.</p>
+    <p style="margin-top:0.5rem; opacity:0.85;">Il contient tous les rationnels <em>et</em> les irrationnels comme \(\sqrt{2}\), \(\pi\), \(\sqrt{3}\)…</p>
+  </div>
+
+  <div class="card">
+    <h3>Outil — Classer un nombre</h3>
+    <div class="controls" style="gap:0.5rem;">
+      <input type="text" id="classify-input" placeholder="ex: 1/3" style="width:120px;">
+      <button class="btn btn-primary" onclick="classifyNumber()">Classer</button>
+    </div>
+    <p style="font-size:0.78rem; color:#888; margin-top:0.4rem;">Exemples : <code>0.25</code>, <code>1/3</code>, <code>sqrt2</code>, <code>pi</code>, <code>-5</code>, <code>7/8</code></p>
+    <div id="classify-result" class="result-box"></div>
+  </div>
+</section>
+
+<!-- ============================================================ 02 INTERVALLES -->
+<section id="intervalles">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>Intervalles de ℝ</h2>
+  </div>
+
+  <div class="card">
+    <h3>Notations</h3>
+    <table>
+      <thead><tr><th>Notation</th><th>Condition</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td>[a ; b]</td><td>a ≤ x ≤ b</td><td>Fermé</td></tr>
+        <tr><td>]a ; b[</td><td>a &lt; x &lt; b</td><td>Ouvert</td></tr>
+        <tr><td>[a ; b[</td><td>a ≤ x &lt; b</td><td>Semi-ouvert</td></tr>
+        <tr><td>]a ; b]</td><td>a &lt; x ≤ b</td><td>Semi-ouvert</td></tr>
+        <tr><td>[a ; +∞[</td><td>x ≥ a</td><td>Infini à droite</td></tr>
+        <tr><td>]−∞ ; b]</td><td>x ≤ b</td><td>Infini à gauche</td></tr>
+        <tr><td>]−∞ ; +∞[</td><td>x ∈ ℝ</td><td>ℝ tout entier</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="numberline-wrap">
+    <h3>Droite numérique interactive</h3>
+    <canvas id="nlCanvas" height="90"></canvas>
+    <div class="controls">
+      <div class="ctrl-group">
+        <label>a =</label>
+        <input type="number" id="nl-a" value="-2" step="0.5" min="-9" max="9" oninput="drawInterval()">
+      </div>
+      <div class="ctrl-group">
+        <label>b =</label>
+        <input type="number" id="nl-b" value="3" step="0.5" min="-9" max="9" oninput="drawInterval()">
+      </div>
+      <div class="ctrl-group">
+        <label>Type</label>
+        <select id="nl-type" onchange="drawInterval()">
+          <option value="cc">[a ; b] — fermé</option>
+          <option value="oo">]a ; b[ — ouvert</option>
+          <option value="co">[a ; b[ — semi-ouvert</option>
+          <option value="oc">]a ; b] — semi-ouvert</option>
+          <option value="ci">[a ; +∞[</option>
+          <option value="oi">]a ; +∞[</option>
+          <option value="ic">]−∞ ; b]</option>
+          <option value="io">]−∞ ; b[</option>
+        </select>
+      </div>
+    </div>
+    <div id="nl-notation" class="result-box" style="margin-top:0.75rem;"></div>
+  </div>
+
+  <div class="card">
+    <h3>Appartenance à un intervalle</h3>
+    <p style="font-size:0.88rem; margin-bottom:0.75rem;">Détermine si un réel appartient à l'intervalle affiché ci-dessus.</p>
+    <div class="controls">
+      <div class="ctrl-group">
+        <label>x =</label>
+        <input type="number" id="mem-x" value="1" step="0.1">
+      </div>
+      <button class="btn btn-primary" onclick="checkMembership()">Vérifier</button>
+    </div>
+    <div id="mem-result"></div>
+  </div>
+</section>
+
+<!-- ============================================================ 03 VALEUR ABSOLUE -->
+<section id="valabs">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Valeur absolue &amp; distance</h2>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Définition</h3>
+      <p>\[|a| = \begin{cases} a & \text{si } a \geq 0 \\ -a & \text{si } a < 0 \end{cases}\]</p>
+      <p style="margin-top:0.5rem; font-size:0.85rem;">\(|a|\) est toujours <strong>positif ou nul</strong>.</p>
+    </div>
+    <div class="card">
+      <h3>Distance</h3>
+      <p>La distance entre deux réels \(a\) et \(b\) sur la droite numérique est :</p>
+      <p style="margin:0.5rem 0;">\[ d(a,b) = |b - a| \]</p>
+      <p style="font-size:0.85rem;">Ex : \(d(3, 5) = |5-3| = 2\) &nbsp;·&nbsp; \(d(-2, 1) = |1-(-2)| = 3\)</p>
+    </div>
+  </div>
+
+  <div class="card highlight">
+    <h3 style="color:var(--gold)">Intervalle centré — caractérisation</h3>
+    <p>Pour \(a \in \mathbb{R}\) et \(r > 0\) :</p>
+    <p style="margin:0.75rem 0; font-size:1.05rem; text-align:center;">
+      \[x \in [a-r\,;\,a+r] \iff |x-a| \leq r\]
+    </p>
+    <p style="font-size:0.88rem; opacity:0.85;">L'intervalle \([a-r\,;\,a+r]\) est centré en \(a\), de « rayon » \(r\).</p>
+  </div>
+
+  <div class="numberline-wrap">
+    <h3>Intervalle centré \([a-r\,;\,a+r]\)</h3>
+    <canvas id="nlCanvas2" height="90"></canvas>
+    <div class="controls">
+      <div class="ctrl-group">
+        <label>a =</label>
+        <input type="number" id="ci-a" value="2" step="0.5" min="-7" max="7" oninput="drawCentered()">
+      </div>
+      <div class="ctrl-group">
+        <label>r =</label>
+        <input type="number" id="ci-r" value="2" step="0.5" min="0.1" max="8" oninput="drawCentered()">
+      </div>
+    </div>
+    <div id="ci-result" class="result-box" style="margin-top:0.75rem;"></div>
+    <div class="controls" style="margin-top:0.5rem;">
+      <div class="ctrl-group">
+        <label>x =</label>
+        <input type="number" id="ci-x" value="1" step="0.5">
+      </div>
+      <button class="btn btn-primary" onclick="checkCentered()">Vérifier |x−a| ≤ r</button>
+    </div>
+    <div id="ci-check" style="margin-top:0.5rem; font-family:'DM Mono',monospace; font-size:0.88rem; padding:0.5rem; background:#f0ebe0; border-radius:2px; min-height:2rem;"></div>
+  </div>
+
+  <div class="card">
+    <h3>Calculatrice de distance</h3>
+    <div class="controls">
+      <div class="ctrl-group"><label>a =</label><input type="number" id="dist-a" value="-3" step="0.5"></div>
+      <div class="ctrl-group"><label>b =</label><input type="number" id="dist-b" value="5" step="0.5"></div>
+      <button class="btn btn-primary" onclick="calcDist()">Calculer</button>
+    </div>
+    <div id="dist-result" class="result-box"></div>
+  </div>
+</section>
+
+<!-- ============================================================ 04 ENCADREMENT -->
+<section id="encadrement">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2>Encadrement décimal</h2>
+  </div>
+
+  <div class="card">
+    <h3>Définition</h3>
+    <p>Un <strong>encadrement d'amplitude \(10^{-n}\)</strong> d'un réel \(x\) est un encadrement par deux décimaux consécutifs :</p>
+    <p style="margin:0.6rem 0;">\[ d \leq x < d + 10^{-n} \quad \text{avec } d \in \mathbb{D} \]</p>
+    <ul style="margin-top:0.5rem;">
+      <li>À \(10^{0} = 1\) près (unité) : \(1 \leq \sqrt{2} < 2\)</li>
+      <li>À \(10^{-1} = 0{,}1\) près : \(1{,}4 \leq \sqrt{2} < 1{,}5\)</li>
+      <li>À \(10^{-2} = 0{,}01\) près : \(1{,}41 \leq \sqrt{2} < 1{,}42\)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Outil — Encadrer un réel</h3>
+    <div class="controls">
+      <div class="ctrl-group">
+        <label>Nombre</label>
+        <select id="enc-num" onchange="computeEncadrement()">
+          <option value="sqrt2">√2</option>
+          <option value="sqrt3">√3</option>
+          <option value="sqrt5">√5</option>
+          <option value="pi">π</option>
+          <option value="e">e</option>
+          <option value="sqrt7">√7</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>Précision</label>
+        <select id="enc-prec" onchange="computeEncadrement()">
+          <option value="0">10⁰ = 1</option>
+          <option value="1">10⁻¹ = 0,1</option>
+          <option value="2" selected>10⁻² = 0,01</option>
+          <option value="3">10⁻³ = 0,001</option>
+          <option value="4">10⁻⁴</option>
+          <option value="5">10⁻⁵</option>
+        </select>
+      </div>
+    </div>
+    <div id="enc-result" style="margin-top:0.75rem;"></div>
+  </div>
+
+  <div class="card">
+    <h3>Arrondir un réel</h3>
+    <div class="controls">
+      <div class="ctrl-group"><label>Valeur</label><input type="number" id="round-val" value="3.14159" step="any" style="width:130px;"></div>
+      <div class="ctrl-group"><label>Décimales</label><input type="number" id="round-dec" value="2" min="0" max="10" style="width:60px;"></div>
+      <button class="btn btn-primary" onclick="doRound()">Arrondir</button>
+    </div>
+    <div id="round-result" class="result-box"></div>
+  </div>
+</section>
+
+<!-- ============================================================ 05 IRRATIONNELS -->
+<section id="irrationnels">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2>Nombres irrationnels</h2>
+  </div>
+
+  <div class="card">
+    <h3>Exemples géométriques</h3>
+    <p style="margin-bottom:0.75rem;">Des irrationnels apparaissent naturellement en géométrie :</p>
+    <canvas id="geoCanvas" width="600" height="160" style="background:white; border:1px solid var(--mist); width:100%;"></canvas>
+    <p style="font-size:0.8rem; color:#777; margin-top:0.5rem; text-align:center;">Carré de côté 1 → diagonale \(\sqrt{2}\) &nbsp;·&nbsp; Cercle de diamètre 1 → périmètre \(\pi\)</p>
+  </div>
+
+  <!-- Démonstration 1 : 1/3 non décimal -->
+  <div class="proof">
+    <div class="proof-title">Démonstration — Programme officiel</div>
+    <button class="proof-toggle" onclick="toggleProof('proof1', this)">
+      <span class="arrow">▶</span>
+      <span>\(\dfrac{1}{3}\) n'est pas un nombre décimal</span>
+    </button>
+    <div class="proof-body" id="proof1">
+      <p>
+        Un nombre décimal s'écrit \(\dfrac{p}{10^n}\) avec \(p \in \mathbb{Z}\) et \(n \in \mathbb{N}\), donc son dénominateur (sous forme irréductible) n'a que 2 et 5 comme facteurs premiers.
+      </p>
+      <p style="margin-top:0.75rem;">
+        Supposons par l'absurde que \(\dfrac{1}{3}\) soit décimal. Il existerait \(p \in \mathbb{Z}\) et \(n \in \mathbb{N}\) tels que
+        \[\frac{1}{3} = \frac{p}{10^n}.\]
+        Alors \(10^n = 3p\), donc 3 divise \(10^n = 2^n \cdot 5^n\).
+        Or \(\gcd(3, 2) = 1\) et \(\gcd(3, 5) = 1\), donc 3 ne peut pas diviser \(2^n \cdot 5^n\) : <strong>contradiction</strong>.
+      </p>
+      <p style="margin-top:0.75rem;">Donc \(\dfrac{1}{3} \notin \mathbb{D}\).</p>
+      <p class="qed">∎</p>
+    </div>
+  </div>
+
+  <!-- Démonstration 2 : sqrt(2) irrationnel -->
+  <div class="proof">
+    <div class="proof-title">Démonstration — Programme officiel</div>
+    <button class="proof-toggle" onclick="toggleProof('proof2', this)">
+      <span class="arrow">▶</span>
+      <span>\(\sqrt{2}\) est irrationnel</span>
+    </button>
+    <div class="proof-body" id="proof2">
+      <p>
+        Supposons par l'absurde que \(\sqrt{2}\) soit rationnel. Il existerait \(p \in \mathbb{Z}\) et \(q \in \mathbb{N}^*\) avec \(\gcd(p, q) = 1\) (fraction irréductible) tels que
+        \[\sqrt{2} = \frac{p}{q}.\]
+      </p>
+      <p style="margin-top:0.75rem;">
+        En élevant au carré : \(2q^2 = p^2\).
+        Donc \(p^2\) est pair, ce qui implique que \(p\) est pair : on pose \(p = 2k\).
+      </p>
+      <p style="margin-top:0.75rem;">
+        Alors \(2q^2 = 4k^2\), soit \(q^2 = 2k^2\).
+        Donc \(q^2\) est pair, et donc \(q\) est pair.
+      </p>
+      <p style="margin-top:0.75rem;">
+        Ainsi 2 divise à la fois \(p\) et \(q\), ce qui contredit \(\gcd(p,q) = 1\) : <strong>contradiction</strong>.
+      </p>
+      <p style="margin-top:0.75rem;">Donc \(\sqrt{2} \notin \mathbb{Q}\) : c'est un <strong>nombre irrationnel</strong>.</p>
+      <p class="qed">∎</p>
+    </div>
+  </div>
+
+  <!-- Développements décimaux -->
+  <div class="card">
+    <h3>Développements décimaux</h3>
+    <p style="font-size:0.88rem; margin-bottom:0.75rem;">Observe la <strong>périodicité</strong> des rationnels et le caractère <strong>non périodique</strong> des irrationnels.</p>
+    <div class="controls">
+      <div class="ctrl-group">
+        <label>Nombre</label>
+        <select id="dec-num" onchange="showDecExpansion()">
+          <option value="1/3">1/3 (rationnel non décimal)</option>
+          <option value="1/7">1/7 (rationnel non décimal)</option>
+          <option value="1/6">1/6 (rationnel non décimal)</option>
+          <option value="0.25">0,25 (décimal)</option>
+          <option value="sqrt2">√2 (irrationnel)</option>
+          <option value="pi">π (irrationnel)</option>
+          <option value="sqrt3">√3 (irrationnel)</option>
+        </select>
+      </div>
+    </div>
+    <div id="dec-expansion" class="dec-digits" style="margin-top:0.75rem;"></div>
+    <div id="dec-info" style="margin-top:0.5rem; font-size:0.82rem; color:#666; font-style:italic;"></div>
+  </div>
+</section>
+
+<!-- ============================================================ 06 ALGORITHME -->
+<section id="algo">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2>Algorithme — Encadrement de √2</h2>
+  </div>
+
+  <div class="card">
+    <h3>Principe du balayage</h3>
+    <p>On part de \(x = 1\) et on avance par pas de \(10^{-n}\) jusqu'à ce que \(x^2 > 2\). L'encadrement est alors \([x - 10^{-n}\,;\,x[\) d'amplitude \(10^{-n}\).</p>
+  </div>
+
+  <div class="card">
+    <h3>Simulation interactive</h3>
+    <div class="controls">
+      <div class="ctrl-group">
+        <label>n =</label>
+        <select id="algo-n">
+          <option value="1">1 (pas = 0,1)</option>
+          <option value="2" selected>2 (pas = 0,01)</option>
+          <option value="3">3 (pas = 0,001)</option>
+          <option value="4">4 (pas = 0,0001)</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="runAlgo()">Lancer le balayage</button>
+      <button class="btn" onclick="resetAlgo()">Réinitialiser</button>
+    </div>
+    <div id="algo-cells" class="algo-grid" style="margin-top:1rem;"></div>
+    <div id="algo-result" class="result-box" style="margin-top:0.75rem;"></div>
+  </div>
+
+  <div class="card" style="background:#f5f0e8; border:1.5px solid var(--mist);">
+    <h3>Pseudo-code</h3>
+    <pre style="font-family:'DM Mono',monospace; font-size:0.82rem; line-height:1.9; white-space:pre-wrap; color:#2d2620;"><span style="color:var(--slate)">Entrée</span> : n entier naturel
+pas ← 10<sup>−n</sup>
+x ← 1
+<span style="color:var(--slate)">Tant que</span> x² ≤ 2 <span style="color:var(--slate)">faire</span>
+    x ← x + pas
+<span style="color:var(--slate)">Fin tant que</span>
+<span style="color:var(--rust)">Afficher</span> : x − pas ≤ √2 &lt; x</pre>
+  </div>
+</section>
+
+<!-- ============================================================ 07 QCM -->
+<section id="qcm">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <h2>QCM interactif</h2>
+  </div>
+
+  <div id="chrono-bar" class="chrono-bar hidden">
+    <span>⏱</span>
+    <span class="chrono-display" id="chrono-display">00:00</span>
+    <button class="chrono-btn" id="chrono-pause-btn" onclick="toggleChrono()">Pause</button>
+    <button class="chrono-btn" onclick="resetChrono()">↺ Remise à zéro</button>
+  </div>
+
+  <div class="qcm-header">
+    <div class="qcm-score" id="qcm-score">0 / 0</div>
+    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+      <button class="btn" id="chrono-toggle-btn" onclick="toggleChronoVisibility()">⏱ Afficher chronomètre</button>
+      <button class="btn btn-primary" onclick="generateQCM()">Nouveau QCM ↻</button>
+    </div>
+  </div>
+
+  <div id="qcm-container"></div>
+</section>
+
+</main>
+
+<!-- ============================================================ 08 CONTACT -->
+<section id="contact" style="max-width:860px; margin:4rem auto 0; padding:0 1.5rem 5rem; scroll-margin-top:2rem;">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <h2>Prendre rendez-vous</h2>
+  </div>
+
+  <div class="grid2" style="gap:1.25rem; margin-bottom:1.25rem;">
+
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfiOvJG1wicFQY8EQufqy5YxGgTPSFPxdyb-OAtk95SUGxWFA/viewform"
+       target="_blank" rel="noopener" style="text-decoration:none; display:block;">
+      <div class="card" style="height:100%; border-left:3px solid var(--slate); cursor:pointer; transition:box-shadow 0.2s, transform 0.2s;"
+           onmouseover="this.style.boxShadow='0 4px 16px rgba(61,90,128,0.15)';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.boxShadow='';this.style.transform=''">
+        <div style="font-size:1.5rem; margin-bottom:0.6rem;">📋</div>
+        <h3>Formulaire de retour</h3>
+        <p style="color:#666; font-size:0.86rem; margin-bottom:1rem;">Avis, erreur signalée ou question.</p>
+        <div style="text-align:center; margin:0.5rem 0 0.75rem;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&color=3d5a80&bgcolor=faf7f2&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSfiOvJG1wicFQY8EQufqy5YxGgTPSFPxdyb-OAtk95SUGxWFA%2Fviewform"
+               alt="QR Formulaire" style="border-radius:2px; border:1px solid var(--mist);">
+        </div>
+        <div style="font-family:'DM Mono',monospace; font-size:0.74rem; color:var(--slate); letter-spacing:0.06em;">Google Forms ↗</div>
+      </div>
+    </a>
+
+    <a href="https://calendly.com/didaskalosmanthanon/30min"
+       target="_blank" rel="noopener" style="text-decoration:none; display:block;">
+      <div class="card" style="height:100%; border-left:3px solid var(--sage); cursor:pointer; transition:box-shadow 0.2s, transform 0.2s;"
+           onmouseover="this.style.boxShadow='0 4px 16px rgba(74,124,89,0.15)';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.boxShadow='';this.style.transform=''">
+        <div style="font-size:1.5rem; margin-bottom:0.6rem;">🎓</div>
+        <h3>Élèves — 30 min</h3>
+        <p style="color:#666; font-size:0.86rem; margin-bottom:1rem;">Créneau individuel de soutien.</p>
+        <div style="text-align:center; margin:0.5rem 0 0.75rem;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&color=4a7c59&bgcolor=faf7f2&data=https%3A%2F%2Fcalendly.com%2Fdidaskalosmanthanon%2F30min"
+               alt="QR Élèves" style="border-radius:2px; border:1px solid var(--mist);">
+        </div>
+        <div style="font-family:'DM Mono',monospace; font-size:0.74rem; color:var(--sage); letter-spacing:0.06em;">Calendly ↗</div>
+      </div>
+    </a>
+
+    <a href="https://calendly.com/didaskalosmanthanon/appel-pro-formation-ou-collaboration-45-min"
+       target="_blank" rel="noopener" style="text-decoration:none; display:block;">
+      <div class="card" style="height:100%; border-left:3px solid var(--gold); cursor:pointer; transition:box-shadow 0.2s, transform 0.2s;"
+           onmouseover="this.style.boxShadow='0 4px 16px rgba(184,134,11,0.15)';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.boxShadow='';this.style.transform=''">
+        <div style="font-size:1.5rem; margin-bottom:0.6rem;">🏫</div>
+        <h3>Professeurs — 45 min</h3>
+        <p style="color:#666; font-size:0.86rem; margin-bottom:1rem;">Formation, collaboration pédagogique.</p>
+        <div style="text-align:center; margin:0.5rem 0 0.75rem;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&color=b8860b&bgcolor=faf7f2&data=https%3A%2F%2Fcalendly.com%2Fdidaskalosmanthanon%2Fappel-pro-formation-ou-collaboration-45-min"
+               alt="QR Professeurs" style="border-radius:2px; border:1px solid var(--mist);">
+        </div>
+        <div style="font-family:'DM Mono',monospace; font-size:0.74rem; color:var(--gold); letter-spacing:0.06em;">Calendly ↗</div>
+      </div>
+    </a>
+
+    <a href="https://calendly.com/didaskalosmanthanon/point-parents-presentation-de-l-outil-15-min"
+       target="_blank" rel="noopener" style="text-decoration:none; display:block;">
+      <div class="card" style="height:100%; border-left:3px solid var(--rust); cursor:pointer; transition:box-shadow 0.2s, transform 0.2s;"
+           onmouseover="this.style.boxShadow='0 4px 16px rgba(192,57,43,0.15)';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.boxShadow='';this.style.transform=''">
+        <div style="font-size:1.5rem; margin-bottom:0.6rem;">👨‍👩‍👧</div>
+        <h3>Parents — 15 min</h3>
+        <p style="color:#666; font-size:0.86rem; margin-bottom:1rem;">Présentation de l'outil &amp; suivi.</p>
+        <div style="text-align:center; margin:0.5rem 0 0.75rem;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&color=c0392b&bgcolor=faf7f2&data=https%3A%2F%2Fcalendly.com%2Fdidaskalosmanthanon%2Fpoint-parents-presentation-de-l-outil-15-min"
+               alt="QR Parents" style="border-radius:2px; border:1px solid var(--mist);">
+        </div>
+        <div style="font-family:'DM Mono',monospace; font-size:0.74rem; color:var(--rust); letter-spacing:0.06em;">Calendly ↗</div>
+      </div>
+    </a>
+
+  </div>
+
+  <p style="font-size:0.78rem; color:#888; font-family:'DM Mono',monospace; text-align:center; letter-spacing:0.04em;">
+    Scannez le QR code ou cliquez sur la carte pour ouvrir le lien.
+  </p>
+</section>
+
+<footer>Seconde · Nombres Réels · <a href="https://eduscol.education.fr/document/24553/download" target="_blank" rel="noopener noreferrer">Conforme au programme officiel Éduscol</a> — ℕ ⊂ ℤ ⊂ 𝔻 ⊂ ℚ ⊂ ℝ</footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
