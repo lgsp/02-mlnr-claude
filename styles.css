@@ -87,7 +87,13 @@ nav a {
   border-bottom: 2px solid transparent;
 }
 nav a:hover { color: var(--parchment); border-bottom-color: var(--gold); }
-
+a { color: var(--sage); }
+a:hover { 
+  color: var(--parchment); 
+  border-bottom-color: var(--gold); 
+  transition: color 0.2s, border-bottom 0.2s;
+  border-bottom: 2px solid transparent;
+}
 /* ---- Main ---- */
 main { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 4rem; }
 section { margin-top: 4rem; scroll-margin-top: 2rem; }

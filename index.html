@@ -17,7 +17,7 @@
 <header>
   <div class="chapter-tag">Seconde · Nombres et calculs · Nombres réels</div>
   <h1>Manipuler les nombres réels</h1>
-  <p>Valeur absolue, distance entre deux nombres, intervalles, ensembles de nombres ℕ ⊂ ℤ ⊂ 𝔻 ⊂ ℚ ⊂ ℝ</p>
+  <p>Valeur absolue, distance entre deux nombres, intervalles, ensembles de nombres ℕ ⊂ ℤ ⊂ 𝔻 ⊂ ℚ ⊂ ℝ conforme au <a href="https://eduscol.education.gouv.fr/sites/default/files/document/spe631annexe1062957pdf-84144.pdf" target="_blank" rel="noopener noreferrer">programme de seconde</a></p>
 </header>
 <nav>
   <a href="#ensembles">Ensembles</a>
@@ -70,8 +70,8 @@
   </div>
 
   <div class="card highlight">
-    <h3 style="color:var(--gold)">ℝ — Nombres réels</h3>
-    <p>L'ensemble \(\mathbb{R}\) est représenté par la <strong>droite numérique</strong> : à chaque point de la droite graduée correspond un unique réel, et réciproquement.</p>
+    <h3 id="R" style="color:var(--gold)">ℝ — Nombres réels</h3>
+    <p>L'ensemble \(\mathbb{R}\) est représenté par la <a href="#dni">droite numérique</a> : à chaque point de la droite graduée correspond un unique réel, et réciproquement.</p>
     <p style="margin-top:0.5rem; opacity:0.85;">Il contient tous les rationnels <em>et</em> les irrationnels comme \(\sqrt{2}\), \(\pi\), \(\sqrt{3}\)…</p>
   </div>
 
@@ -110,7 +110,7 @@
   </div>
 
   <div class="numberline-wrap">
-    <h3>Droite numérique interactive</h3>
+    <h3 id="dni">Droite numérique interactive (extrait de l'ensemble des <a href="#R">nombres réels</a>)</h3>
     <canvas id="nlCanvas" height="90"></canvas>
     <div class="controls">
       <div class="ctrl-group">
@@ -454,38 +454,6 @@ x ← 1
                alt="QR Formulaire" style="border-radius:2px; border:1px solid var(--mist);">
         </div>
         <div style="font-family:'DM Mono',monospace; font-size:0.74rem; color:var(--slate); letter-spacing:0.06em;">Google Forms ↗</div>
-      </div>
-    </a>
-
-    <a href="https://calendly.com/didaskalosmanthanon/30min"
-       target="_blank" rel="noopener" style="text-decoration:none; display:block;">
-      <div class="card" style="height:100%; border-left:3px solid var(--sage); cursor:pointer; transition:box-shadow 0.2s, transform 0.2s;"
-           onmouseover="this.style.boxShadow='0 4px 16px rgba(74,124,89,0.15)';this.style.transform='translateY(-2px)'"
-           onmouseout="this.style.boxShadow='';this.style.transform=''">
-        <div style="font-size:1.5rem; margin-bottom:0.6rem;">🎓</div>
-        <h3>Élèves — 30 min</h3>
-        <p style="color:#666; font-size:0.86rem; margin-bottom:1rem;">Créneau individuel de soutien.</p>
-        <div style="text-align:center; margin:0.5rem 0 0.75rem;">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&color=4a7c59&bgcolor=faf7f2&data=https%3A%2F%2Fcalendly.com%2Fdidaskalosmanthanon%2F30min"
-               alt="QR Élèves" style="border-radius:2px; border:1px solid var(--mist);">
-        </div>
-        <div style="font-family:'DM Mono',monospace; font-size:0.74rem; color:var(--sage); letter-spacing:0.06em;">Calendly ↗</div>
-      </div>
-    </a>
-
-    <a href="https://calendly.com/didaskalosmanthanon/appel-pro-formation-ou-collaboration-45-min"
-       target="_blank" rel="noopener" style="text-decoration:none; display:block;">
-      <div class="card" style="height:100%; border-left:3px solid var(--gold); cursor:pointer; transition:box-shadow 0.2s, transform 0.2s;"
-           onmouseover="this.style.boxShadow='0 4px 16px rgba(184,134,11,0.15)';this.style.transform='translateY(-2px)'"
-           onmouseout="this.style.boxShadow='';this.style.transform=''">
-        <div style="font-size:1.5rem; margin-bottom:0.6rem;">🏫</div>
-        <h3>Professeurs — 45 min</h3>
-        <p style="color:#666; font-size:0.86rem; margin-bottom:1rem;">Formation, collaboration pédagogique.</p>
-        <div style="text-align:center; margin:0.5rem 0 0.75rem;">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&color=b8860b&bgcolor=faf7f2&data=https%3A%2F%2Fcalendly.com%2Fdidaskalosmanthanon%2Fappel-pro-formation-ou-collaboration-45-min"
-               alt="QR Professeurs" style="border-radius:2px; border:1px solid var(--mist);">
-        </div>
-        <div style="font-family:'DM Mono',monospace; font-size:0.74rem; color:var(--gold); letter-spacing:0.06em;">Calendly ↗</div>
       </div>
     </a>
 
